@@ -1,8 +1,7 @@
 package com.delazeri.link_bio_auth_service.domain.entity;
 
 import com.delazeri.link_bio_auth_service.domain.enums.AccountStatus;
-
-import java.util.ArrayList;
+import com.delazeri.link_bio_auth_service.domain.enums.Role;
 
 public class User {
     private String firstName;
@@ -11,19 +10,19 @@ public class User {
     private String username;
     private String password;
     private String imageUrl;
-    private ArrayList<Role> roles;
+    private Role role;
     private AccountStatus accountStatus;
 
     public User(){}
 
-    public User(String firstName, String lastName, String email, String username, String password, String imageUrl, ArrayList<Role> roles, AccountStatus accountStatus) {
+    public User(String firstName, String lastName, String email, String username, String password, String imageUrl, Role role, AccountStatus accountStatus) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.password = password;
         this.imageUrl = imageUrl;
-        this.roles = roles;
+        this.role = role;
         this.accountStatus = accountStatus;
     }
 
@@ -75,12 +74,12 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    public ArrayList<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(ArrayList<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public AccountStatus getAccountStatus() {
