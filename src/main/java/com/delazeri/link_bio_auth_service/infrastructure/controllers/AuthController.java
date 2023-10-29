@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(value = "/api/users")
+@RequestMapping(value = "api/auth")
 public class AuthController {
     private final CreateUserUseCase createUserUseCase;
     private final UserMapper userMapper;
@@ -26,7 +26,7 @@ public class AuthController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping
+    @PostMapping(value = "register")
     public ResponseEntity<Response<RegisterUserResponse>> registerUser(
             @RequestBody @Valid CreateUserRequest createUserRequest
     ) {
