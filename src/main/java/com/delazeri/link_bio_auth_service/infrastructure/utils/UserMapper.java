@@ -2,6 +2,7 @@ package com.delazeri.link_bio_auth_service.infrastructure.utils;
 
 import com.delazeri.link_bio_auth_service.domain.entity.User;
 import com.delazeri.link_bio_auth_service.infrastructure.controllers.dtos.requests.CreateUserRequest;
+import com.delazeri.link_bio_auth_service.infrastructure.controllers.dtos.responses.RegisterUserResponse;
 import org.springframework.stereotype.Component;
 
 @Component
