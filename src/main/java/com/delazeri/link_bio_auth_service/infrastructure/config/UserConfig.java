@@ -7,6 +7,7 @@ import com.delazeri.link_bio_auth_service.infrastructure.persistence.jpa.reposit
 import com.delazeri.link_bio_auth_service.infrastructure.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.UUID;
 
@@ -14,8 +15,8 @@ import java.util.UUID;
 public class UserConfig {
 
     @Bean
-    UserGateway<UUID> userGateway(UserRepository userRepository) {
-        return new UserService(userRepository);
+    UserGateway<UUID> userGateway(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        return new UserService(userRepository, passwordEncoder);
     }
 
     @Bean
