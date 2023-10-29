@@ -1,5 +1,7 @@
 package com.delazeri.link_bio_auth_service.infrastructure.persistence.jpa.entities;
 
+import com.delazeri.link_bio_auth_service.domain.enums.AccountStatus;
+import com.delazeri.link_bio_auth_service.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,4 +25,6 @@ public class UserEntity {
     private String username;
     private String email;
     private String password;
+    private AccountStatus accountStatus;
+    private Role role;
 }
