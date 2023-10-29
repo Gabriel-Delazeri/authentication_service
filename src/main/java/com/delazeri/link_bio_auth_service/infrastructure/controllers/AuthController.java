@@ -3,6 +3,8 @@ package com.delazeri.link_bio_auth_service.infrastructure.controllers;
 import com.delazeri.link_bio_auth_service.application.usecases.contracts.CreateUserUseCase;
 import com.delazeri.link_bio_auth_service.domain.entity.User;
 import com.delazeri.link_bio_auth_service.infrastructure.controllers.dtos.requests.CreateUserRequest;
+import com.delazeri.link_bio_auth_service.infrastructure.controllers.dtos.responses.RegisterUserResponse;
+import com.delazeri.link_bio_auth_service.infrastructure.controllers.dtos.responses.Response;
 import com.delazeri.link_bio_auth_service.infrastructure.utils.UserMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/api/users")
@@ -23,9 +27,20 @@ public class AuthController {
     }
 
     @PostMapping
-    public ResponseEntity<User> registerUser(@RequestBody @Valid CreateUserRequest createUserRequest) {
-        User user = userMapper.createUserRequestToDomainObj(createUserRequest);
+    public ResponseEntity<Response<RegisterUserResponse>> registerUser(
+            @RequestBody @Valid CreateUserRequest createUserRequest
+    ) {
+        User user = createUserUseCase.createUser(
+                userMapper.createUserRequestToDomainObj(createUserRequest)
+        );
 
-        return ResponseEntity.ok(createUserUseCase.createUser(user));
+        return ResponseEntity.ok(
+                new Response<>(new RegisterUserResponse(
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getUsername(),
+                        user.getEmail()
+                ), true, new ArrayList<>())
+        );
     }
 }
