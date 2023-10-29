@@ -2,7 +2,6 @@ package com.delazeri.link_bio_auth_service.application.usecases.implementations;
 
 import com.delazeri.link_bio_auth_service.application.gateways.AuthGateway;
 import com.delazeri.link_bio_auth_service.application.usecases.contracts.LoginUserUseCase;
-import com.delazeri.link_bio_auth_service.domain.entity.User;
 
 public class LoginUserUseCaseImpl implements LoginUserUseCase {
     private final AuthGateway authGateway;
@@ -12,7 +11,7 @@ public class LoginUserUseCaseImpl implements LoginUserUseCase {
     }
 
     @Override
-    public String loginUser(User user) {
-        return authGateway.loginUser(user);
+    public String loginUser(String username, String password) {
+        return authGateway.loginUser(username, password);
     }
 }
