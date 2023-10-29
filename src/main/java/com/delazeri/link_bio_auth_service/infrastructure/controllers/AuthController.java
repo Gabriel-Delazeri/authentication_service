@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api/users")
-public class UserController {
+public class AuthController {
     private final CreateUserUseCase createUserUseCase;
     private final UserMapper userMapper;
 
-    public UserController(CreateUserUseCase createUserUseCase, UserMapper userMapper) {
+    public AuthController(CreateUserUseCase createUserUseCase, UserMapper userMapper) {
         this.createUserUseCase = createUserUseCase;
         this.userMapper = userMapper;
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody @Valid CreateUserRequest createUserRequest) {
+    public ResponseEntity<User> registerUser(@RequestBody @Valid CreateUserRequest createUserRequest) {
         User user = userMapper.createUserRequestToDomainObj(createUserRequest);
 
         return ResponseEntity.ok(createUserUseCase.createUser(user));
