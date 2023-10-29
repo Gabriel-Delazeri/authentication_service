@@ -2,6 +2,8 @@ package com.delazeri.link_bio_auth_service.infrastructure.services;
 
 import com.delazeri.link_bio_auth_service.application.gateways.UserGateway;
 import com.delazeri.link_bio_auth_service.domain.entity.User;
+import com.delazeri.link_bio_auth_service.domain.enums.AccountStatus;
+import com.delazeri.link_bio_auth_service.domain.enums.Role;
 import com.delazeri.link_bio_auth_service.infrastructure.persistence.jpa.entities.UserEntity;
 import com.delazeri.link_bio_auth_service.infrastructure.persistence.jpa.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
@@ -26,6 +28,8 @@ public class UserService implements UserGateway<UUID> {
         BeanUtils.copyProperties(user, userEntity);
 
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setRole(Role.COMMON);
+        userEntity.setAccountStatus(AccountStatus.ACTIVE);
 
         User userDomainObj = new User();
         BeanUtils.copyProperties(repository.save(userEntity), userDomainObj);
